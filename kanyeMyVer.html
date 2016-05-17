@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+	
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+	<title>KanyeJS version 1.0</title>
+
+	<!--  -->
+
+	<style>
+		
+
+		
+		#header {
+			background-image: url(kanyebg.jpg);
+			background-color: black;	
+			display: block;
+			width: 100%;
+			background-image: img-responsive;
+			background-repeat: no-repeat;
+			padding:150px;
+			text-align: center;
+			color: white;
+			border-radius:none;
+			margin: 5px;
+			height: 700px;
+	
+		}
+        
+		#storyLine {
+			margin:auto;
+			padding: 50px;
+		
+			color: teal;
+			text-align: center;
+		}
+		#quiz {
+
+			color: black;
+			text-align: center;
+			padding: 50px;
+			font-size: 17px;
+		}
+
+		
+		#twitter{
+			height: 10px;
+			margin-left: 10px;
+		}
+		
+	</style>
+
+</head>
+
+<body>
+
+	<div id="header"><h1><strong>B*itch Imma Learn to Code.<br/></strong> <em>Because I'm for real broke</em> </h1><br/><h3>Help Kanye do Kanye and make money to create even more great things for the world. Help me learn to code</h3>
+		<p>"I was never really good at anything except for the ability to learn." <br/>- Kanye West</div>
+
+	
+	<div id="storyLine">
+		<p style="font-size:20px;">Kanye still loves Kanye. In fact we all still love Kanye.<Br/><br/>But here's the deal:<br/> "I'm broke and although I can buy furs and houses for my family I dont have enough money to bring all of my amazing ideas to life. I've asked Mark Z to do me a solid and loan me some cash but he thinks he's too cool for the Kanye, and denied me. I'm going to do a cross country tour to raise money so I can fulfill my dreams of starting a tech company. After all, 2016 is the year to try things!"<br/><br/>Can you help Kanye get across the country, all the way from New York City to Sillicon Valley to blow the socks straight off all the investors.<br/> <br/>Help Kanye answer questions along the way, get em right and you move ahead. But screw up and we've gotta drag broke Kanye all the way back to NYC.</p>
+		<div id="map"><img src="KanyeMap-NewYork-400.jpg" "img img-responsive" style="border: none"/></div><br/><br/>
+		<button type="submit" class="btn btn-default" onclick="doDopeShit()">Play</button></div>
+	
+	<div id="quiz"></div>	
+	
+	<div id="twitter">
+		<hr>
+		<a class="twitter-timeline" id="feed" href="https://twitter.com/kanyewest" data-widget-id="731571105446526976" height="300" data-chrome="transparent noheader nofooter">Tweets by @kanyewest</a>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+	</div>	
+		
+  
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	<script>
+		
+		
+var kanye = {
+  
+ 	
+  	newYorkQ1: 'Which built-in method returns the calling string value converted to lower case?',
+	
+	newYorkQ2: 'Which of the following function of String object returns the primitive value of the specified object?',
+	
+	
+	chicagoQ1: 'Which CSS property is used to change the background color?',
+	
+	chicagoQ2:'What does CSS actually stand for?',   
+	
+	newYorkQ1A1:'changeCase(case)',
+	newYorkQ1A2:'toLower()',
+	newYorkQ1A3c:'toLowerCase()',
+	
+	newYorkQ2A1: 'toUpperCase()',
+	newYorkQ2A2c:'valueOf()',
+	newYorkQ2A3: 'toLocaleUpperCase()',
+
+	
+	chicagoQ1A1c: 'background-color',
+	chicagoQ1A2: 'background',
+	chicagoQ1A3: 'fieldcolor',
+	
+	chicagocQ2A1c:'cascading style sheets',
+	chicagocQ2A2: 'can\'t stop stylin',
+	chicagocQ2A3: 'counting stacks stacking',
+
+    concert1:'How you gon\' be mad on vacation? Dutty winin \'round all these ______',
+	concert2: 'I miss the old Kanye, straight from the \'Go Kanye, _____ the soul Kanye, set on his goals Kanye I hate the new Kanye, the bad mood Kanye',
+	concert3: '"She take my money when I\'m in need, Yeah she\'s a trifling friend indeed, Oh she\'s a gold digger way over town, _____',
+	
+	concertAnswer1_1: 'Fat Bacons',
+	concertAnswer1_2: 'Mistakens',
+	concertAnswer1_3c: 'Jamaicans',
+	
+	concertAnswer2_1c: 'Chop up',
+	concertAnswer2_2: 'Back to',
+	concertAnswer2_3: 'Tough in',
+	
+	concertAnswer3_1: 'She takes from me',
+	concertAnswer3_2c: 'That dig\'s on me',
+	concertAnswer3_3: 'Who loves on me'
+}
+
+//track correct answers
+var correctAnswer = 0;  
+//track incorrect answers	
+var incorrectAnswer = 0;
+//track question number
+var questNum = 0;
+		
+//questions into variables
+var NY_1 = kanye.newYorkQ1;
+var NY_2 = kanye.newYorkQ2;
+
+var CH_1 = kanye.chicagoQ1;
+var CH_2 = kanye.chicagoQ2;
+
+function doDopeShit()
+		{
+//first clear the storyline
+document.getElementById('storyLine').innerHTML = ' ';
+
+//load question
+questNum++;
+console.log('question number' +questNum);
+
+if (questNum == 1){
+content = ' '
+content += '<img src="KanyeMap-NewYork-400.jpg" "img img-responsive" style="border: none"/>';
+content += NY_1 +'<br/><br/>';
+content += '<button type="submit" class="btn btn-default" onclick="wrong()">' + kanye.newYorkQ1A1 +'</button>     ';
+content += '<button type="submit" class="btn btn-default" onclick="wrong()">' + kanye.newYorkQ1A2 + '</button>     ';
+content += '<button type="submit" class="btn btn-default" onclick="right()">' + kanye.newYorkQ1A3c + ' </button>'; 
+document.getElementById('quiz').innerHTML = content ;
+}
+
+if (questNum == 2){
+content = ' '
+content += '<img src="KanyeMap-NewYork-400.jpg" "img-responsive" style="border: none" "align: center"/>';
+content += NY_2 +'<br/><br/>';
+content += '<button type="submit" class="btn btn-default" onclick="wrong()">' + kanye.newYorkQ2A1 +'</button>     ';
+content += '<button type="submit" class="btn btn-default" onclick="right()">' + kanye.newYorkQ2A2c + '</button>     ';
+content += '<button type="submit" class="btn btn-default" onclick="wrong()">' + kanye.newYorkQ2A3 + '</button>';
+document.getElementById('quiz').innerHTML = content ;
+}
+if (questNum == 3){
+content = ' '
+content += '<img src="KanyeMap-NewYork-400.jpg" "img img-responsive" style="border: none"/>';
+content +=  CH_1 +'<br/><br/>';
+content += '<button type="submit" class="btn btn-default" onclick="right()">' + kanye.chicagoQ1A1c +'</button>     ';
+content += '<button type="submit" class="btn btn-default" onclick="wrong()">' + kanye.chicagoQ1A2 + '</button>     ';
+content += '<button type="submit" class="btn btn-default" onclick="wrong()">' + kanye.chicagoQ1A3 + '</button>';
+document.getElementById('quiz').innerHTML = content ;
+}
+if (questNum == 4){
+content = ' '
+content += '<img src="KanyeMap-NewYork-400.jpg" "img img-responsive" style="border: none"/>';
+content += CH_2 +'<br/><br/>';
+content += '<button type="submit" class="btn btn-default" onclick="right()">' + kanye.chicagocQ2A1c +'</button>     ';
+content += '<button type="submit" class="btn btn-default" onclick="wrong()">' + kanye.chicagocQ2A2 + '</button>     ';
+content += '<button type="submit" class="btn btn-default" onclick="wrong()">' + kanye.chicagocQ2A3 + '</button>';
+document.getElementById('quiz').innerHTML = content ;
+}
+if (questNum > 4) {
+	console.log('end of quiz');
+	document.getElementById('quiz').innerHTML = ' ';
+	document.getElementById('quiz').innerHTML = ' You got ' +correctAnswer + ' correct and ' +incorrectAnswer + ' incorrect. ';			  }
+			
+		}//end doDopeShit
+
+function right(){
+	correctAnswer++;
+	console.log('correct ' +correctAnswer);
+	doDopeShit();
+} 
+function wrong(){
+	incorrectAnswer++;
+	console.log('incorrect '+incorrectAnswer);
+	doDopeShit();
+}
+
+		
+	</script>
+
+</body>
+
+</html>
